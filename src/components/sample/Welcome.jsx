@@ -25,8 +25,11 @@ export function Welcome(props) {
   const { teamsUserCredential } = useContext(TeamsFxContext);
   console.log({ teamsUserCredential });
   const { loading, data, error } = useData(async () => {
+    console.log("teamsUserCredential found");
     if (teamsUserCredential) {
+      console.log("getting userInfo");
       const userInfo = await teamsUserCredential.getUserInfo();
+      console.log("userInfo", userInfo);
       return userInfo;
     }
   });
