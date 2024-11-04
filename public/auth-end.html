@@ -34,13 +34,14 @@
               cacheLocation: "sessionStorage",
             },
           };
-
+          console.log("end msalConfig", msalConfig);
           const msalInstance = new window.msal.PublicClientApplication(
             msalConfig
           );
           msalInstance
             .handleRedirectPromise()
             .then((tokenResponse) => {
+              console.log({ tokenResponse });
               if (tokenResponse !== null) {
                 microsoftTeams.authentication.notifySuccess(
                   JSON.stringify({
@@ -54,6 +55,7 @@
               }
             })
             .catch((error) => {
+              console.log({ error });
               microsoftTeams.authentication.notifyFailure(
                 JSON.stringify(error)
               );
