@@ -33,6 +33,15 @@ export function Welcome(props) {
   const hubName = useData(async () => {
     await app.initialize();
     const context = await app.getContext();
+    app.settings.setValidityState(true);
+    app.settings.registerOnSaveHandler((saveEvent) => {
+      console.log("Saved");
+
+      // Perform any additional save logic here
+
+      // Signal that the save operation is complete
+      saveEvent.notifySuccess();
+    });
     return context.app.host.name;
   })?.data;
   const [selectedValue, setSelectedValue] = useState("local");
@@ -44,8 +53,12 @@ export function Welcome(props) {
     <div className="welcome page">
       <div className="narrow page-padding">
         <Image src="hello.png" />
-        <h1 className="center">Congratulations{userName ? ", " + userName : ""}!</h1>
-        <p className="center">Your app is running in your {friendlyEnvironmentName}</p>
+        <h1 className="center">
+          Congratulations{userName ? ", " + userName : ""}!
+        </h1>
+        <p className="center">
+          Your app is running in your {friendlyEnvironmentName}
+        </p>
         {hubName && <p className="center">Your app is running in {hubName}</p>}
 
         <div className="tabList">

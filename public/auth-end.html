@@ -24,10 +24,6 @@
 
       microsoftTeams.app.initialize().then(() => {
         microsoftTeams.app.getContext().then(async (context) => {
-          microsoftTeams.settings.setValidityState(true);
-          microsoftTeams.settings.registerOnSaveHandler(function (data) {
-            console.log("Saved", data);
-          });
           const msalConfig = {
             auth: {
               clientId: clientId,
