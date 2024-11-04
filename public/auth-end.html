@@ -24,6 +24,10 @@
 
       microsoftTeams.app.initialize().then(() => {
         microsoftTeams.app.getContext().then(async (context) => {
+          microsoftTeams.settings.setValidityState(true);
+          microsoftTeams.settings.registerOnSaveHandler(function (data) {
+            console.log("Saved", data);
+          });
           const msalConfig = {
             auth: {
               clientId: clientId,
@@ -35,7 +39,9 @@
             },
           };
 
-          const msalInstance = new window.msal.PublicClientApplication(msalConfig);
+          const msalInstance = new window.msal.PublicClientApplication(
+            msalConfig
+          );
           msalInstance
             .handleRedirectPromise()
             .then((tokenResponse) => {
@@ -46,11 +52,15 @@
                   })
                 );
               } else {
-                microsoftTeams.authentication.notifyFailure("Get empty response.");
+                microsoftTeams.authentication.notifyFailure(
+                  "Get empty response."
+                );
               }
             })
             .catch((error) => {
-              microsoftTeams.authentication.notifyFailure(JSON.stringify(error));
+              microsoftTeams.authentication.notifyFailure(
+                JSON.stringify(error)
+              );
             });
         });
       });
