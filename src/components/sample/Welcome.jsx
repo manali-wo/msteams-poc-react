@@ -23,12 +23,14 @@ export function Welcome(props) {
     }[environment] || "local environment";
 
   const { teamsUserCredential } = useContext(TeamsFxContext);
+  console.log({ teamsUserCredential });
   const { loading, data, error } = useData(async () => {
     if (teamsUserCredential) {
       const userInfo = await teamsUserCredential.getUserInfo();
       return userInfo;
     }
   });
+  console.log({ data });
   const userName = loading || error ? "" : data.displayName;
   const hubName = useData(async () => {
     await app.initialize();
@@ -54,7 +56,7 @@ export function Welcome(props) {
       <div className="narrow page-padding">
         <Image src="hello.png" />
         <h1 className="center">
-          Congratulations{userName ? ", " + userName : ""}!
+          Congratulations new {userName ? ", " + userName : ""}!
         </h1>
         <p className="center">
           Your app is running in your {friendlyEnvironmentName}

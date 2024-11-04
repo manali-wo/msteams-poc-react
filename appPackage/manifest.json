@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.17/MicrosoftTeams.schema.json",
   "manifestVersion": "1.17",
-  "version": "1.0.11",
+  "version": "1.0.13",
   "id": "${{TEAMS_APP_ID}}",
   "developer": {
     "name": "Webosmotic",
@@ -40,21 +40,19 @@
       ]
     }
   ],
-  "staticTabs": [
-    {
-      "entityId": "index",
-      "name": "Home",
-      "contentUrl": "${{TAB_ENDPOINT}}/index.html#/tab",
-      "websiteUrl": "${{TAB_ENDPOINT}}/index.html#/tab",
-      "scopes": ["personal", "groupChat", "team"]
-    }
-  ],
-  "permissions": ["identity", "messageTeamMembers"],
+  "defaultGroupCapability": {
+    "meetings": "tab",
+    "team": "tab",
+    "groupchat": "tab"
+  },
+  "staticTabs": [],
   "validDomains": ["${{TAB_HOSTNAME}}"],
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",
-    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+    "resource": "api://onrender.com/9334b7c5-1fe7-43ce-832b-d8b90af6d1e"
   },
+  "defaultInstallScope": "meetings",
+  "permissions": ["identity", "messageTeamMembers"],
   "authorization": {
     "permissions": {
       "resourceSpecific": [
