@@ -37,7 +37,7 @@ export function Welcome(props) {
   const userName = loading || error ? "" : data.displayName;
   console.log("userName", userName);
   const hubName = useData(async () => {
-    console.log("initialize app");
+    console.log("initialize app", app);
     await app.initialize();
     const context = await app.getContext();
     console.log("context", context);
