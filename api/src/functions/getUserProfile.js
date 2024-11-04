@@ -103,6 +103,7 @@ async function getUserProfile(req, context) {
   // Create a graph client to access user's Microsoft 365 data after user has consented.
   try {
     // Create an instance of the TokenCredentialAuthenticationProvider by passing the tokenCredential instance and options to the constructor
+    console.log("credential", credential);
     const authProvider = new TokenCredentialAuthenticationProvider(credential, {
       scopes: ["https://graph.microsoft.com/.default"],
     });
