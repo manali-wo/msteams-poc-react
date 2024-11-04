@@ -41,15 +41,6 @@ export function Welcome(props) {
     await microsoftTeams.app.initialize();
     const context = await microsoftTeams.app.getContext();
     console.log("context", context);
-    await microsoftTeams.settings.setValidityState(true);
-    await microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
-      console.log("Saved");
-
-      // Perform any additional save logic here
-
-      // Signal that the save operation is complete
-      saveEvent.notifySuccess();
-    });
     return context.app.host.name;
   })?.data;
   console.log("hubName", hubName);
@@ -63,7 +54,7 @@ export function Welcome(props) {
       <div className="narrow page-padding">
         <Image src="hello.png" />
         <h1 className="center">
-          Congratulations {userName ? ", " + userName : ""}!
+          Congratulations 1 {userName ? ", " + userName : ""}!
         </h1>
         <p className="center">
           Your app is running in your {friendlyEnvironmentName}
