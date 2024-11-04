@@ -59,7 +59,7 @@ export function Welcome(props) {
       <div className="narrow page-padding">
         <Image src="hello.png" />
         <h1 className="center">
-          Congratulations new 111 {userName ? ", " + userName : ""}!
+          Congratulations new 222 {userName ? ", " + userName : ""}!
         </h1>
         <p className="center">
           Your app is running in your {friendlyEnvironmentName}
