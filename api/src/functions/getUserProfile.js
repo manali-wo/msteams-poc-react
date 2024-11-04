@@ -64,7 +64,7 @@ async function getUserProfile(req, context) {
       clientId: config.clientId,
       clientSecret: config.clientSecret,
     };
-    console.log({authConfig});
+    console.log({ authConfig });
     credential = new teamsfxSdk.OnBehalfOfUserCredential(ssoToken, authConfig);
   } catch (e) {
     context.error(e);
