@@ -8,7 +8,7 @@ import { useData } from "@microsoft/teamsfx-react";
 import { Deploy } from "./Deploy";
 import { Publish } from "./Publish";
 import { TeamsFxContext } from "../Context";
-import { app } from "@microsoft/teams-js";
+import * as microsoftTeams from "@microsoft/teams-js";
 
 export function Welcome(props) {
   const { showFunction, environment } = {
@@ -37,12 +37,12 @@ export function Welcome(props) {
   const userName = loading || error ? "" : data.displayName;
   console.log("userName", userName);
   const hubName = useData(async () => {
-    console.log("initialize app", app);
-    await app.initialize();
-    const context = await app.getContext();
+    console.log("initialize app", microsoftTeams.app);
+    await microsoftTeams.app.initialize();
+    const context = await microsoftTeams.app.getContext();
     console.log("context", context);
-    await app.setValidityState(true);
-    await app.registerOnSaveHandler((saveEvent) => {
+    await microsoftTeams.settings.setValidityState(true);
+    await microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
       console.log("Saved");
 
       // Perform any additional save logic here
