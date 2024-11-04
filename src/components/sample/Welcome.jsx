@@ -30,13 +30,12 @@ export function Welcome(props) {
       return userInfo;
     }
   });
-  console.log({ data });
+  console.log({ loading, data, error });
   const userName = loading || error ? "" : data.displayName;
   const hubName = useData(async () => {
     await app.initialize();
-    const context = await app.getContext();
-    app.settings.setValidityState(true);
-    app.settings.registerOnSaveHandler((saveEvent) => {
+    await app.settings.setValidityState(true);
+    await app.settings.registerOnSaveHandler((saveEvent) => {
       console.log("Saved");
 
       // Perform any additional save logic here
@@ -44,6 +43,7 @@ export function Welcome(props) {
       // Signal that the save operation is complete
       saveEvent.notifySuccess();
     });
+    const context = await app.getContext();
     return context.app.host.name;
   })?.data;
   const [selectedValue, setSelectedValue] = useState("local");
