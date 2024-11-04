@@ -21,7 +21,11 @@
     <script type="text/javascript">
       microsoftTeams.app.initialize().then(() => {
         microsoftTeams.app.getContext().then(async (context) => {
-          console.log({ context });
+          microsoftTeams.settings.setValidityState(true);
+          microsoftTeams.settings.registerOnSaveHandler(function (data) {
+            console.log("Saved", data);
+          });
+          console.log("context", { context });
           // Generate random state string and store it, so we can verify it in the callback
           var currentURL = new URL(window.location);
           var clientId = currentURL.searchParams.get("clientId");
@@ -38,7 +42,7 @@
               cacheLocation: "sessionStorage",
             },
           };
-          console.log({ msalConfig });
+          console.log("msalConfig", { msalConfig });
 
           const msalInstance = new msal.PublicClientApplication(msalConfig);
           const scopesArray = scope.split(" ");
