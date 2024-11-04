@@ -42,7 +42,10 @@ async function getUserProfile(req, context) {
   res.body.receivedHTTPRequestBody = (await req.text()) || "";
 
   // Prepare access token.
-  const ssoToken = req.headers.get("Authorization")?.replace("Bearer ", "").trim();
+  const ssoToken = req.headers
+    .get("Authorization")
+    ?.replace("Bearer ", "")
+    .trim();
   if (!ssoToken) {
     return {
       status: 400,
@@ -61,6 +64,7 @@ async function getUserProfile(req, context) {
       clientId: config.clientId,
       clientSecret: config.clientSecret,
     };
+    console.log({authConfig});
     credential = new teamsfxSdk.OnBehalfOfUserCredential(ssoToken, authConfig);
   } catch (e) {
     context.error(e);
@@ -80,7 +84,8 @@ async function getUserProfile(req, context) {
     if (currentUser && currentUser.displayName) {
       res.body.userInfoMessage = `User display name is ${currentUser.displayName}.`;
     } else {
-      res.body.userInfoMessage = "No user information was found in access token.";
+      res.body.userInfoMessage =
+        "No user information was found in access token.";
     }
   } catch (e) {
     context.error(e);

@@ -4,5 +4,5 @@ const config = {
   clientId: process.env.M365_CLIENT_ID,
   clientSecret: process.env.M365_CLIENT_SECRET,
 };
-
+console.log({ config });
 module.exports = config;
