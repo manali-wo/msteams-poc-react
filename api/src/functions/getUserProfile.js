@@ -40,12 +40,13 @@ async function getUserProfile(req, context) {
 
   // Put an echo into response body.
   res.body.receivedHTTPRequestBody = (await req.text()) || "";
-
+  console.log("header", req.headers);
   // Prepare access token.
   const ssoToken = req.headers
     .get("Authorization")
     ?.replace("Bearer ", "")
     .trim();
+  console.log("ssoToken", ssoToken);
   if (!ssoToken) {
     return {
       status: 400,
@@ -58,13 +59,14 @@ async function getUserProfile(req, context) {
   // Construct TeamsFx using user identity.
   let credential;
   try {
+    console.log("config", config);
     const authConfig = {
       authorityHost: config.authorityHost,
       tenantId: config.tenantId,
       clientId: config.clientId,
       clientSecret: config.clientSecret,
     };
-    console.log({ authConfig });
+    console.log("authConfig", authConfig);
     credential = new teamsfxSdk.OnBehalfOfUserCredential(ssoToken, authConfig);
   } catch (e) {
     context.error(e);
@@ -81,6 +83,7 @@ async function getUserProfile(req, context) {
   // Query user's information from the access token.
   try {
     const currentUser = await credential.getUserInfo();
+    console.log("currentUser", currentUser);
     if (currentUser && currentUser.displayName) {
       res.body.userInfoMessage = `User display name is ${currentUser.displayName}.`;
     } else {
