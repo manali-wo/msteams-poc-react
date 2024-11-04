@@ -35,7 +35,9 @@ export function Welcome(props) {
   });
   console.log({ loading, data, error });
   const userName = loading || error ? "" : data.displayName;
+  console.log("userName", userName);
   const hubName = useData(async () => {
+    console.log("initialize app");
     await app.initialize();
     await app.settings.setValidityState(true);
     await app.settings.registerOnSaveHandler((saveEvent) => {
@@ -49,6 +51,7 @@ export function Welcome(props) {
     const context = await app.getContext();
     return context.app.host.name;
   })?.data;
+  console.log("hubName", hubName);
   const [selectedValue, setSelectedValue] = useState("local");
 
   const onTabSelect = (event, data) => {
@@ -59,7 +62,7 @@ export function Welcome(props) {
       <div className="narrow page-padding">
         <Image src="hello.png" />
         <h1 className="center">
-          Congratulations new 222 {userName ? ", " + userName : ""}!
+          Congratulations {userName ? ", " + userName : ""}!
         </h1>
         <p className="center">
           Your app is running in your {friendlyEnvironmentName}
