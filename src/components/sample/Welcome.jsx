@@ -39,8 +39,10 @@ export function Welcome(props) {
   const hubName = useData(async () => {
     console.log("initialize app");
     await app.initialize();
-    await app.settings.setValidityState(true);
-    await app.settings.registerOnSaveHandler((saveEvent) => {
+    const context = await app.getContext();
+    console.log("context", context);
+    await app.setValidityState(true);
+    await app.registerOnSaveHandler((saveEvent) => {
       console.log("Saved");
 
       // Perform any additional save logic here
@@ -48,7 +50,6 @@ export function Welcome(props) {
       // Signal that the save operation is complete
       saveEvent.notifySuccess();
     });
-    const context = await app.getContext();
     return context.app.host.name;
   })?.data;
   console.log("hubName", hubName);
