@@ -1,8 +1,8 @@
 const config = {
-  authorityHost: "https://login.microsoftonline.com",
-  tenantId: "9188040d-6c67-4c5b-b112-36a304b66dad",
-  clientId: "9334b7c5-1fe7-43ce-832b-d8b90af6d1ed",
-  clientSecret: "4f7a0388-dba4-46d7-8453-c2828dd0060a",
+  authorityHost: process.env.M365_AUTHORITY_HOST,
+  tenantId: process.env.M365_TENANT_ID,
+  clientId: process.env.M365_CLIENT_ID,
+  clientSecret: process.env.M365_CLIENT_SECRET,
 };
 console.log({ config });
 module.exports = config;

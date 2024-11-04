@@ -21,10 +21,6 @@
     <script type="text/javascript">
       microsoftTeams.app.initialize().then(() => {
         microsoftTeams.app.getContext().then(async (context) => {
-          microsoftTeams.settings.setValidityState(true);
-          microsoftTeams.settings.registerOnSaveHandler(function (data) {
-            console.log("Saved", data);
-          });
           console.log("context", { context });
           // Generate random state string and store it, so we can verify it in the callback
           var currentURL = new URL(window.location);
@@ -35,7 +31,7 @@
           const msalConfig = {
             auth: {
               clientId: clientId,
-              authority: `https://login.microsoftonline.com/9188040d-6c67-4c5b-b112-36a304b66dad`,
+              authority: `https://login.microsoftonline.com/${context.user.tenant.id}`,
               navigateToLoginRequestUrl: false,
             },
             cache: {
