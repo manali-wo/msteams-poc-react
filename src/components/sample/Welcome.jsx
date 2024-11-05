@@ -39,11 +39,11 @@ export function Welcome(props) {
   const hubName = useData(async () => {
     console.log("initialize app", microsoftTeams.app);
     await microsoftTeams.app.initialize();
+    const context = await microsoftTeams.app.getContext();
     microsoftTeams.pages.config.setValidityState(true);
     microsoftTeams.pages.config.registerOnSaveHandler(function (data) {
       console.log("Saved", data);
     });
-    const context = await microsoftTeams.app.getContext();
     console.log("context", context);
     return context.app.host.name;
   })?.data;
