@@ -41,8 +41,17 @@ export function Welcome(props) {
     await microsoftTeams.app.initialize();
     const context = await microsoftTeams.app.getContext();
     microsoftTeams.pages.config.setValidityState(true);
-    microsoftTeams.pages.config.registerOnSaveHandler(function (data) {
-      console.log("Saved", data);
+    microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+      console.log("Saved", saveEvent);
+      microsoftTeams.settings.setSettings({
+        entityId: "99f319f1-6d5a-4875-b157-4d730ea6f16b",
+        contentUrl: "https://msteams-poc-react.onrender.com", // URL of your app content
+        suggestedDisplayName: "My Custom App",
+        websiteUrl: "https://msteams-poc-react.onrender.com", // Optional: website URL
+      });
+
+      // Call saveEvent.notifySuccess() if saving was successful
+      saveEvent.notifySuccess();
     });
     console.log("context", context);
     return context.app.host.name;
