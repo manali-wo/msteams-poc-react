@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.17/MicrosoftTeams.schema.json",
   "manifestVersion": "1.17",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "id": "${{TEAMS_APP_ID}}",
   "developer": {
     "name": "Webosmotic",
@@ -23,6 +23,10 @@
   },
   "accentColor": "#FFFFFF",
   "bots": [],
+  "meetingExtensionDefinition": {
+    "supportsAnonymousGuestUsers": true,
+    "supportsStreaming": true
+  },
   "composeExtensions": [],
   "configurableTabs": [
     {
@@ -47,7 +51,7 @@
     "groupchat": "tab"
   },
   "staticTabs": [],
-  "validDomains": ["${{TAB_HOSTNAME}}"],
+  "validDomains": ["${{TAB_HOSTNAME}}", "${{TAB_DOMAIN}}"],
   "webApplicationInfo": {
     "id": "${{AAD_APP_CLIENT_ID}}",
     "resource": "api://msteams-poc-react.onrender.com/9334b7c5-1fe7-43ce-832b-d8b90af6d1ed"
